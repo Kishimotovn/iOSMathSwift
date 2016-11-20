@@ -40,7 +40,19 @@
 		DBC490871DE1455600D6DD3C /* AtomListIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC490861DE1455600D6DD3C /* AtomListIndex.swift */; };
 		DBC490891DE1ED3800D6DD3C /* AtomListRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC490881DE1ED3800D6DD3C /* AtomListRange.swift */; };
 		DBC4908B1DE1F2B800D6DD3C /* UnicodeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC4908A1DE1F2B800D6DD3C /* UnicodeSymbol.swift */; };
+		DBC490971DE2113E00D6DD3C /* iOSMathSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC490961DE2113E00D6DD3C /* iOSMathSwiftTests.swift */; };
+		DBC490991DE2113E00D6DD3C /* iOSMathSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB751ED11DDF4F14004C549C /* iOSMathSwift.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBC4909A1DE2113E00D6DD3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB751EC81DDF4F14004C549C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB751ED01DDF4F14004C549C;
+			remoteInfo = iOSMathSwift;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DB28B2101DE0D408001D6CA6 /* AtomListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListBuilder.swift; sourceTree = "<group>"; };
@@ -78,6 +90,9 @@
 		DBC490861DE1455600D6DD3C /* AtomListIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListIndex.swift; sourceTree = "<group>"; };
 		DBC490881DE1ED3800D6DD3C /* AtomListRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListRange.swift; sourceTree = "<group>"; };
 		DBC4908A1DE1F2B800D6DD3C /* UnicodeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnicodeSymbol.swift; sourceTree = "<group>"; };
+		DBC490941DE2113E00D6DD3C /* iOSMathSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSMathSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBC490961DE2113E00D6DD3C /* iOSMathSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMathSwiftTests.swift; sourceTree = "<group>"; };
+		DBC490981DE2113E00D6DD3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +100,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBC490911DE2113E00D6DD3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBC490991DE2113E00D6DD3C /* iOSMathSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +119,7 @@
 			children = (
 				DB751EDC1DDF4F37004C549C /* iosMath */,
 				DB751ED31DDF4F14004C549C /* iOSMathSwift */,
+				DBC490951DE2113E00D6DD3C /* iOSMathSwiftTests */,
 				DB751ED21DDF4F14004C549C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				DB751ED11DDF4F14004C549C /* iOSMathSwift.framework */,
+				DBC490941DE2113E00D6DD3C /* iOSMathSwiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +205,15 @@
 			path = internal;
 			sourceTree = "<group>";
 		};
+		DBC490951DE2113E00D6DD3C /* iOSMathSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				DBC490961DE2113E00D6DD3C /* iOSMathSwiftTests.swift */,
+				DBC490981DE2113E00D6DD3C /* Info.plist */,
+			);
+			path = iOSMathSwiftTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -226,12 +260,31 @@
 			productReference = DB751ED11DDF4F14004C549C /* iOSMathSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		DBC490931DE2113E00D6DD3C /* iOSMathSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBC4909C1DE2113E00D6DD3C /* Build configuration list for PBXNativeTarget "iOSMathSwiftTests" */;
+			buildPhases = (
+				DBC490901DE2113E00D6DD3C /* Sources */,
+				DBC490911DE2113E00D6DD3C /* Frameworks */,
+				DBC490921DE2113E00D6DD3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBC4909B1DE2113E00D6DD3C /* PBXTargetDependency */,
+			);
+			name = iOSMathSwiftTests;
+			productName = iOSMathSwiftTests;
+			productReference = DBC490941DE2113E00D6DD3C /* iOSMathSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DB751EC81DDF4F14004C549C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Anh Phan Tran";
 				TargetAttributes = {
@@ -239,6 +292,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 4SCM77QT7P;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					DBC490931DE2113E00D6DD3C = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 4SCM77QT7P;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -256,12 +314,20 @@
 			projectRoot = "";
 			targets = (
 				DB751ED01DDF4F14004C549C /* iOSMathSwift */,
+				DBC490931DE2113E00D6DD3C /* iOSMathSwiftTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DB751ECF1DDF4F14004C549C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBC490921DE2113E00D6DD3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -296,7 +362,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DBC490901DE2113E00D6DD3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBC490971DE2113E00D6DD3C /* iOSMathSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DBC4909B1DE2113E00D6DD3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB751ED01DDF4F14004C549C /* iOSMathSwift */;
+			targetProxy = DBC4909A1DE2113E00D6DD3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DB751ED71DDF4F14004C549C /* Debug */ = {
@@ -439,6 +521,30 @@
 			};
 			name = Release;
 		};
+		DBC4909D1DE2113E00D6DD3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 4SCM77QT7P;
+				INFOPLIST_FILE = iOSMathSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tpa.usth.iOSMathSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DBC4909E1DE2113E00D6DD3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 4SCM77QT7P;
+				INFOPLIST_FILE = iOSMathSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tpa.usth.iOSMathSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -459,6 +565,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DBC4909C1DE2113E00D6DD3C /* Build configuration list for PBXNativeTarget "iOSMathSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBC4909D1DE2113E00D6DD3C /* Debug */,
+				DBC4909E1DE2113E00D6DD3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

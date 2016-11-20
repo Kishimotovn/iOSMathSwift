@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "iOSMathSwift"
-  s.version      = "0.0.1"
+  s.version      = "1.5"
   s.summary      = "Swift version of iOSMath, parsing Latex into String"
 
   # This description is used to generate tags and improve search results.

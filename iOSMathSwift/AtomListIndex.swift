@@ -8,8 +8,8 @@
 
 import Foundation
 
-class AtomListIndex {
-    enum AtomListSubIndexType: Int {
+public class AtomListIndex {
+    public enum AtomListSubIndexType: Int {
         case none = 0
         case nucleus
         case superScript
@@ -123,11 +123,11 @@ class AtomListIndex {
     /** Factory function to create a `MTMathListIndex` with no subindexes.
      @param index The index of the atom that the `MTMathListIndex` points at.
      */
-    init(level0Index: Int) {
+    public init(level0Index: Int) {
         self.atomIndex = level0Index
     }
     
-    convenience init(at location: Int, with subIndex: AtomListIndex?, type: AtomListSubIndexType) {
+    public convenience init(at location: Int, with subIndex: AtomListIndex?, type: AtomListSubIndexType) {
         self.init(level0Index: location)
         self.subIndexType = type
         self.subIndex = subIndex
@@ -135,7 +135,7 @@ class AtomListIndex {
 }
 
 extension AtomListIndex: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         if self.subIndex != nil {
             return "[\(self.atomIndex), \(self.subIndexType.rawValue):\(self.subIndex!)]"
         }
@@ -144,7 +144,7 @@ extension AtomListIndex: CustomStringConvertible {
 }
 
 extension AtomListIndex: Hashable {
-    var hashValue: Int {
+    public var hashValue: Int {
         let prime = 31
         var hash = self.atomIndex
         
@@ -156,7 +156,7 @@ extension AtomListIndex: Hashable {
 }
 
 extension AtomListIndex: Equatable {
-    static func ==(lhs: AtomListIndex, rhs: AtomListIndex) -> Bool {
+    public static func ==(lhs: AtomListIndex, rhs: AtomListIndex) -> Bool {
         if lhs.atomIndex != rhs.atomIndex || lhs.subIndexType != rhs.subIndexType {
             return false
         }

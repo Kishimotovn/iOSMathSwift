@@ -9,7 +9,7 @@
 import Foundation
 
 // type defines spacing and how it is rendered
-enum AtomType: String {
+public enum AtomType: String {
     case ordinary = "Ordinary" // number or text
     case number = "Number" // number
     case variable = "Variable"// text in italic
@@ -35,40 +35,30 @@ enum AtomType: String {
     case table = "Table"
 }
 
-class Atom: Any, CustomStringConvertible {
-    var type: AtomType
-    var isScriptsAllowed: Bool {
-        return self.type != .boundary &&
-                self.type != .space &&
-                self.type != .style &&
-                self.type != .table
-    }
-    var subScript: AtomList? {
-        get {
-            return self.subScript
-        }
-        set {
-            if self.isScriptsAllowed {
-                self.subScript = newValue
-            } else {
-                print("subscripts not allowed for atom \(self.type.rawValue)")
-            }
+public class Atom: Any, CustomStringConvertible {
+    public var type: AtomType
+    public var subScript: AtomList?
+    public var superScript: AtomList?
+    
+    public func setSuperScript(_ list: AtomList?) {
+        if self.isScriptsAllowed() {
+            self.superScript = list
+        } else {
+            print("superscripts not allowed for atom \(self.type.rawValue)")
+            self.superScript = nil
         }
     }
-    var superScript: AtomList? {
-        get {
-            return self.superScript
+    
+    public func setSubScript(_ list: AtomList?) {
+        if self.isScriptsAllowed() {
+            self.subScript = list
+        } else {
+            print("subscripts not allowed for atom \(self.type.rawValue)")
+            self.subScript = nil
         }
-        set {
-            if self.isScriptsAllowed {
-                self.superScript = newValue
-            } else {
-                print("superscripts not allowed for atom \(self.type.rawValue)")
-            }
-        }
-
     }
-    var description: String {
+    
+    public var description: String {
         var string = ""
         
         string += self.nucleus
@@ -81,8 +71,9 @@ class Atom: Any, CustomStringConvertible {
         
         return string
     }
-    var nucleus: String = ""
-    var finalized: Atom {
+    
+    public var nucleus: String = ""
+    public var finalized: Atom {
         let finalized = self
         if finalized.superScript != nil {
             finalized.superScript = finalized.superScript!.finalized
@@ -94,12 +85,15 @@ class Atom: Any, CustomStringConvertible {
     }
     
     // atoms that fused to create this one
-    var childAtoms = [Atom]()
+    public var childAtoms = [Atom]()
     
     // indexRange in list that this atom tracks:
-    var indexRange: NSRange = NSRange(location: 0, length: 0)
+    public var indexRange: NSRange = NSRange(location: 0, length: 0)
     
     func fuse(with atom: Atom) {
+        assert(self.subScript == nil, "Cannot fuse into an atom which has a subscript: \(self)");
+        assert(self.superScript == nil, "Cannot fuse into an atom which has a superscript: \(self)");
+        assert(atom.type == self.type, "Only atoms of the same type can be fused. \(self), \(atom)");
         guard self.subScript == nil,
             self.superScript == nil,
             self.type == atom.type
@@ -126,7 +120,14 @@ class Atom: Any, CustomStringConvertible {
         self.subScript = atom.subScript
     }
     
-    init(type: AtomType, value: String) {
+    func isScriptsAllowed() -> Bool {
+        return self.type != .boundary &&
+            self.type != .space &&
+            self.type != .style &&
+            self.type != .table
+    }
+    
+    public init(type: AtomType, value: String) {
         self.type = type
         self.nucleus = value
     }
@@ -146,19 +147,19 @@ extension Atom {
     }
 }
 
-class AtomFraction: Atom {
-    var hasRule: Bool = true
-    var leftDelimiter: String?
-    var rightDelimiter: String?
-    var numerator: AtomList? = AtomList()
-    var denominator: AtomList? = AtomList()
+public class AtomFraction: Atom {
+    public var hasRule: Bool = true
+    public var leftDelimiter: String?
+    public var rightDelimiter: String?
+    public var numerator: AtomList? = AtomList()
+    public var denominator: AtomList? = AtomList()
     
-    override var description: String {
+    override public var description: String {
         var string = ""
         if self.hasRule {
-            string += "\\\\atop"
+            string += "\\atop"
         } else {
-            string += "\\\\frac"
+            string += "\\frac"
         }
         if self.leftDelimiter != nil {
             string += "[\(self.leftDelimiter)]"
@@ -167,7 +168,7 @@ class AtomFraction: Atom {
             string += "[\(self.rightDelimiter)]"
         }
         
-        string += "{\(self.numerator?.description)}{\(self.denominator?.description)}"
+        string += "{\(self.numerator?.description ?? "placeholder")}{\(self.denominator?.description ?? "placeholder")}"
         
         if self.superScript != nil {
             string += "^{\(self.superScript!.description)}"
@@ -179,7 +180,7 @@ class AtomFraction: Atom {
         return string
     }
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomFraction = super.finalized as! AtomFraction
         
         finalized.numerator = finalized.numerator?.finalized
@@ -194,7 +195,7 @@ class AtomFraction: Atom {
     }
 }
 
-class AtomRadical: Atom {
+public class AtomRadical: Atom {
     // Under the roof
     var radicand: AtomList? = AtomList()
     
@@ -205,15 +206,15 @@ class AtomRadical: Atom {
         self.init(type: .radical, value: "")
     }
     
-    override var description: String {
-        var string = "\\\\sqrt"
+    override public var description: String {
+        var string = "\\sqrt"
         
         if self.degree != nil {
             string += "[\(self.degree!.description)]"
         }
         
         if self.radicand != nil {
-            string += "{\(self.radicand?.description)}"
+            string += "{\(self.radicand?.description ?? "placeholder")}"
         }
         
         if self.superScript != nil {
@@ -226,7 +227,7 @@ class AtomRadical: Atom {
         return string
     }
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomRadical = super.finalized as! AtomRadical
         
         finalized.radicand = finalized.radicand?.finalized
@@ -236,7 +237,7 @@ class AtomRadical: Atom {
     }
 }
 
-class AtomLargeOperator: Atom {
+public class AtomLargeOperator: Atom {
     var limits: Bool = false
     
     convenience init(value: String, limits: Bool = false) {
@@ -245,7 +246,7 @@ class AtomLargeOperator: Atom {
     }
 }
 
-class AtomInner: Atom {
+public class AtomInner: Atom {
     var innerList: AtomList?
     var leftBoundary: Atom? {
         get {
@@ -276,8 +277,8 @@ class AtomInner: Atom {
         }
     }
     
-    override var description: String {
-        var string = "\\\\inner"
+    override public var description: String {
+        var string = "\\inner"
         
         if self.leftBoundary != nil {
             string += "[\(self.leftBoundary!.nucleus)]"
@@ -298,7 +299,7 @@ class AtomInner: Atom {
         return string
     }
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomInner = super.finalized as! AtomInner
         
         finalized.innerList = finalized.innerList?.finalized
@@ -311,10 +312,10 @@ class AtomInner: Atom {
     }
 }
 
-class AtomOverLine: Atom {
+public class AtomOverLine: Atom {
     var innerList: AtomList?
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomOverLine = super.finalized as! AtomOverLine
         
         finalized.innerList = finalized.innerList?.finalized
@@ -327,10 +328,10 @@ class AtomOverLine: Atom {
     }
 }
 
-class AtomUnderLine: Atom {
+public class AtomUnderLine: Atom {
     var innerList: AtomList?
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomUnderLine = super.finalized as! AtomUnderLine
         
         finalized.innerList = finalized.innerList?.finalized
@@ -343,10 +344,10 @@ class AtomUnderLine: Atom {
     }
 }
 
-class AtomAccent: Atom {
+public class AtomAccent: Atom {
     var innerList: AtomList?
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomAccent = super.finalized as! AtomAccent
         
         finalized.innerList = finalized.innerList?.finalized
@@ -359,7 +360,7 @@ class AtomAccent: Atom {
     }
 }
 
-class AtomSpace: Atom {
+public class AtomSpace: Atom {
     var space: CGFloat = 0
     
     convenience init(space: CGFloat) {
@@ -368,14 +369,14 @@ class AtomSpace: Atom {
     }
 }
 
-enum AtomLineStyle {
+public enum AtomLineStyle {
     case display
     case text
     case script
     case scriptOfScript
 }
 
-class AtomStyle: Atom {
+public class AtomStyle: Atom {
     var style: AtomLineStyle = .display
     
     convenience init(style: AtomLineStyle = .display) {
@@ -384,13 +385,13 @@ class AtomStyle: Atom {
     }
 }
 
-enum AtomTableColumnAlignment {
+public enum AtomTableColumnAlignment {
     case left
     case center
     case right
 }
 
-class AtomTable: Atom {
+public class AtomTable: Atom {
     var alignments = [AtomTableColumnAlignment]()
     var cells = [[AtomList]]()
     
@@ -398,7 +399,7 @@ class AtomTable: Atom {
     var interColumnSpacing: CGFloat = 0
     var interRowAdditionalSpacing: CGFloat = 0
     
-    override var finalized: Atom {
+    override public var finalized: Atom {
         let finalized: AtomTable = super.finalized as! AtomTable
         
         for var row in finalized.cells {

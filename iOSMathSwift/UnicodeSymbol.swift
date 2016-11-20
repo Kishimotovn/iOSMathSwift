@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UnicodeSymbol {
+public struct UnicodeSymbol {
     static let multiplication = "\u{00D7}"
     static let division = "\u{00F7}"
     static let fractionSlash = "\u{2044}"
@@ -35,7 +35,7 @@ struct UnicodeSymbol {
 }
 
 extension String {
-    func unicodeLength() -> Int {
+    public func unicodeLength() -> Int {
         return self.lengthOfBytes(using: String.Encoding.utf32)/4
     }
 }

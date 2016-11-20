@@ -10,7 +10,7 @@ import Foundation
 
 // represent list of math objects
 extension AtomList: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         var description = ""
         for atom in self.atoms {
             description += atom.description
@@ -19,10 +19,10 @@ extension AtomList: CustomStringConvertible {
     }
 }
 
-class AtomList {
-    var atoms: [Atom]
+public class AtomList {
+    public var atoms: [Atom]
     
-    var finalized: AtomList {
+    public var finalized: AtomList {
         let finalizedList = AtomList()
         let zeroRange = NSMakeRange(0, 0)
         
@@ -72,11 +72,11 @@ class AtomList {
         return finalizedList
     }
     
-    init(atoms: [Atom]) {
+    public init(atoms: [Atom]) {
         self.atoms = atoms
     }
     
-    init() {
+    public init() {
         self.atoms = []
     }
     

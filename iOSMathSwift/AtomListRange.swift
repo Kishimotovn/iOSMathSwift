@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AtomListRange {
+public class AtomListRange {
     var start: AtomListIndex
     var length: Int
     
@@ -25,6 +25,7 @@ class AtomListRange {
     
     func union(with range: AtomListRange) -> AtomListRange? {
         if !self.start.isAtSameLevel(with: range.start) {
+            assert(false, "Cannot union ranges at different levels: \(self), \(range)")
             print("Can't union ranges at different levels: \(self), \(range)")
             return nil
         }
@@ -41,49 +42,53 @@ class AtomListRange {
         } else if unionRange.location == r2.location {
             start = range.start
         } else {
+            assert(unionRange.location == r2.location)
             return nil
         }
         
         return AtomListRange(start: start, length: unionRange.length)
     }
     
-    static func union(ranges: [AtomListRange]) -> AtomListRange? {
+    public static func union(ranges: [AtomListRange]) -> AtomListRange? {
         if ranges.count == 0 {
+            assert(ranges.count > 0, "Need to union atleast 1 range")
             print("Need to union atleast 1 range")
             return nil
         }
         
         var unioned = ranges[0]
         for i in 1..<ranges.count {
-            unioned.union(with: ranges[i])
+            if let u = unioned.union(with: ranges[i]) {
+                unioned = u
+            }
         }
         return unioned
     }
     
     /// Creates a valid range.
-    init(start: AtomListIndex, length: Int) {
+    public init(start: AtomListIndex, length: Int) {
         self.start = start
         self.length = length
     }
     
     /// Creates a range at level 0 from the give range.
-    convenience init(range: NSRange) {
+    public convenience init(range: NSRange) {
         self.init(start: AtomListIndex(level0Index: range.location), length: range.length)
     }
     
     /// Makes a range of length 1
-    convenience init(start: AtomListIndex) {
+    public convenience init(start: AtomListIndex) {
         self.init(start: start, length: 1)
     }
     
     /// Makes a range of length 1 at the level 0 index start
-    convenience init(startIndex: Int) {
+    public convenience init(startIndex: Int) {
         self.init(start: AtomListIndex(level0Index: startIndex))
     }
 }
 
 extension AtomListRange: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         return "(\(self.start), \(self.length))"
     }
 }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-class AtomFactory {
-    static let aliases = [
+public class AtomFactory {
+    public static let aliases = [
         "lnot" : "neg",
         "land" : "wedge",
         "lor" : "vee",
@@ -25,7 +25,7 @@ class AtomFactory {
         "AA" : "angstrom"
     ]
     
-    static let delimiters = [
+    public static let delimiters = [
         "." : "", // . means no delimiter
         "(" : "(",
         ")" : ")",
@@ -34,7 +34,7 @@ class AtomFactory {
         "<" : "\u{2329}",
         ">" : "\u{232A}",
         "/" : "/",
-        "\\\\" : "\\\\",
+        "\\" : "\\",
         "|" : "|",
         "lgroup" : "\u{27EE}",
         "rgroup" : "\u{27EF}",
@@ -47,7 +47,7 @@ class AtomFactory {
         "Uparrow" : "\u{21D1}",
         "Downarrow" : "\u{21D3}",
         "Updownarrow" : "\u{21D5}",
-        "backslash" : "\\\\",
+        "backslash" : "\\",
         "rangle" : "\u{232A}",
         "langle" : "\u{2329}",
         "rbrace" : "}",
@@ -61,7 +61,7 @@ class AtomFactory {
     ]
     
     var _delimValueToName: [String: String]? = nil
-    var delimValueToName: [String: String] {
+    public var delimValueToName: [String: String] {
         if _delimValueToName == nil {
             var output = [String: String]()
             
@@ -83,7 +83,7 @@ class AtomFactory {
         return _delimValueToName!
     }
     
-    static let accents = [
+    public static let accents = [
         "grave" :  "\u{0300}",
         "acute" :  "\u{0301}",
         "hat" :  "\u{0302}",  // In our implementation hat and widehat behave the same.
@@ -99,7 +99,7 @@ class AtomFactory {
     ]
     
     var _accentValueToName: [String: String]? = nil
-    var accentValueToName: [String: String] {
+    public var accentValueToName: [String: String] {
         if _accentValueToName == nil {
             var output = [String: String]()
             
@@ -123,7 +123,7 @@ class AtomFactory {
         return _accentValueToName!
     }
     
-    var supportedLatexSymbols: [String: Atom] = [
+    public var supportedLatexSymbols: [String: Atom] = [
         "square" : AtomFactory.placeholder(),
         
          // Greek characters
@@ -333,7 +333,7 @@ class AtomFactory {
         "%" : Atom(type: .ordinary, value: "%"),
         "_" : Atom(type: .ordinary, value: "_"),
         " " : Atom(type: .ordinary, value: " "),
-        "backslash" : Atom(type: .ordinary, value: "\\\\"),
+        "backslash" : Atom(type: .ordinary, value: "\\"),
 
         // Punctuation
         // Note: \colon is different from : which is a relation
@@ -389,7 +389,7 @@ class AtomFactory {
     var latexSymbolNames = [String]()
     
     var _textToLatexSymbolName: [String: String]? = nil
-    var textToLatexSymbolName: [String: String] {
+    public var textToLatexSymbolName: [String: String] {
         get {
             if self._textToLatexSymbolName == nil {
                 var output = [String: String]()
@@ -425,26 +425,26 @@ class AtomFactory {
         }
     }
     
-    static let sharedInstance = AtomFactory()
+    public static let sharedInstance = AtomFactory()
     
     private init() { }
     
     // Return an atom for times sign \times or *
-    static func times() -> Atom {
+    public static func times() -> Atom {
         return Atom(type: .binaryOperator, value: UnicodeSymbol.multiplication)
     }
     
     // Return an atom for division sign \div or /
-    static func divide() -> Atom {
+    public static func divide() -> Atom {
         return Atom(type: .binaryOperator, value: UnicodeSymbol.division)
     }
     
     // Return an atom aka placeholder square
-    static func placeholder() -> Atom {
+    public static func placeholder() -> Atom {
         return Atom(type: .placeholder, value: UnicodeSymbol.whiteSquare)
     }
     
-    static func placeholderFraction() -> AtomFraction {
+    public static func placeholderFraction() -> AtomFraction {
         let frac = AtomFraction()
         
         frac.numerator = AtomList()
@@ -455,7 +455,7 @@ class AtomFactory {
         return frac
     }
     
-    static func placeholderSquareRoot() -> AtomRadical {
+    public static func placeholderSquareRoot() -> AtomRadical {
         let rad = AtomRadical()
         
         rad.radicand = AtomList()
@@ -464,7 +464,7 @@ class AtomFactory {
         return rad
     }
     
-    static func placeholderRadical() -> AtomRadical {
+    public static func placeholderRadical() -> AtomRadical {
         let rad = AtomRadical()
         
         rad.radicand = AtomList()
@@ -486,11 +486,11 @@ class AtomFactory {
      - Chars with special meaning in latex: ^ _ { } \
      All other characters will have a non-nil atom returned.
      */
-    static func atom(for char: String) -> Atom? {
-        let atomCharacterSet = CharacterSet(charactersIn: UnicodeScalar(0x75)!...UnicodeScalar(0x21)!)
+    public static func atom(for char: String) -> Atom? {
+        let atomCharacterSet = CharacterSet(charactersIn: UnicodeScalar(0x21)!...UnicodeScalar(0x7E)!)
         if char.rangeOfCharacter(from: atomCharacterSet) != nil {
             switch char {
-            case "$", "%", "#", "&", "~", "\'", "^", "_", "{", "}", "\\\\":
+            case "$", "%", "#", "&", "~", "\'", "^", "_", "{", "}", "\\":
                 return nil
             case "(", "[":
                 return Atom(type: .open, value: char)
@@ -516,6 +516,7 @@ class AtomFactory {
             case "\"", "/", "@", "`", "|":
                 return Atom(type: .ordinary, value: char)
             default:
+                assert(false, "Unknown Character: \(char)")
                 print("Unknown characters: \(char)")
                 return nil
             }
@@ -526,7 +527,7 @@ class AtomFactory {
     /** Returns a `MTMathList` with one atom per character in the given string. This function
      does not do any LaTeX conversion or interpretation. It simply uses `atomForCharacter` to
      convert the characters to atoms. Any character that cannot be converted is ignored. */
-    static func atomList(for string: String) -> AtomList {
+    public static func atomList(for string: String) -> AtomList {
         let list = AtomList()
         
         for character in string.characters {
@@ -541,7 +542,7 @@ class AtomFactory {
     /** Returns an atom with the right type for a given latex symbol (e.g. theta)
      If the latex symbol is unknown this will return nil. This supports LaTeX aliases as well.
      */
-    static func atom(forLatexSymbol name: String) -> Atom? {
+    public static func atom(forLatexSymbol name: String) -> Atom? {
         var _name = name
         
         if let canonicalName = AtomFactory.aliases[name] {
@@ -563,7 +564,7 @@ class AtomFactory {
      alias.
      @note: This function does not convert MathSpaces to latex command names either.
      */
-    static func latexSymbolName(for atom: Atom) -> String? {
+    public static func latexSymbolName(for atom: Atom) -> String? {
         if atom.nucleus.characters.count == 0 {
             return nil
         }
@@ -576,14 +577,14 @@ class AtomFactory {
      e.g. to define a symbol for "lcm" one can call:
      `[MTMathAtomFactory addLatexSymbol:@"lcm" value:[MTMathAtomFactory operatorWithName:@"lcm" limits: false)]` */
     
-    static func define(latexSymbol name: String, value: Atom) {
+    public static func define(latexSymbol name: String, value: Atom) {
         AtomFactory.sharedInstance.supportedLatexSymbols[name] = value
         AtomFactory.sharedInstance.textToLatexSymbolName[value.nucleus] = name
     }
     
     /** Returns a large opertor for the given name. If limits is true, limits are set up on
      the operator and displyed differently. */
-    static func getOperator(withName name: String, limits: Bool) -> AtomLargeOperator {
+    public static func getOperator(withName name: String, limits: Bool) -> AtomLargeOperator {
         return AtomLargeOperator(value: name, limits: limits)
     }
     
@@ -591,7 +592,7 @@ class AtomFactory {
      such as `grave`, `hat` etc. If the name is not a recognized accent name, this
      returns nil. The `innerList` of the returned `MTAccent` is nil.
      */
-    static func getAccent(withName name: String) -> AtomAccent? {
+    public static func getAccent(withName name: String) -> AtomAccent? {
         if let accentValue = AtomFactory.accents[name] {
             return AtomAccent(value: accentValue)
         }
@@ -600,7 +601,7 @@ class AtomFactory {
     
     /** Returns the accent name for the given accent. This is the reverse of the above
      function. */
-    static func getName(of accent: AtomAccent) -> String? {
+    public static func getName(of accent: AtomAccent) -> String? {
         return AtomFactory.sharedInstance.accentValueToName[accent.nucleus]
     }
     
@@ -610,7 +611,7 @@ class AtomFactory {
      @note In order to distinguish between the delimiter '|' and the delimiter '\|' the delimiter '\|'
      the has been renamed to '||'.
      */
-    static func boundary(forDelimiter name: String) -> Atom? {
+    public static func boundary(forDelimiter name: String) -> Atom? {
         if let delimValue = AtomFactory.delimiters[name] {
             return Atom(type: .boundary, value: delimValue)
         }
@@ -622,7 +623,7 @@ class AtomFactory {
      @note This is not an exact reverse of the above function. Some delimiters have two names (e.g.
      `<` and `langle`) and this function always returns the shorter name.
      */
-    static func getDelimiterName(of boundary: Atom) -> String? {
+    public static func getDelimiterName(of boundary: Atom) -> String? {
         if boundary.type != .boundary {
             return nil
         }
@@ -630,7 +631,7 @@ class AtomFactory {
     }
     
     /** Returns a fraction with the given numerator and denominator. */
-    static func fraction(withNumerator num: AtomList, denominator denom: AtomList) -> AtomFraction {
+    public static func fraction(withNumerator num: AtomList, denominator denom: AtomList) -> AtomFraction {
         let frac = AtomFraction()
         
         frac.numerator = num
@@ -641,7 +642,7 @@ class AtomFactory {
     
     /** Simplification of above function when numerator and denominator are simple strings.
      This function uses `mathListForCharacters` to convert the strings to `MTMathList`s. */
-    static func fraction(withNumeratorString numStr: String, denominatorString denomStr: String) -> AtomFraction {
+    public static func fraction(withNumeratorString numStr: String, denominatorString denomStr: String) -> AtomFraction {
         let num = AtomFactory.atomList(for: numStr)
         let denom = AtomFactory.atomList(for: denomStr)
         
@@ -655,7 +656,7 @@ class AtomFactory {
      @note The reason this function returns a `MTMathAtom` and not a `MTMathTable` is because some
      matrix environments are have builtin delimiters added to the table and hence are returned as inner atoms.
      */
-    static func table(withEnvironment env: String?, rows: [[AtomList]]) -> Atom? {
+    public static func table(withEnvironment env: String?, rows: [[AtomList]]) -> Atom? {
         let table = AtomTable(environment: env)
         
         for i in 0..<rows.count {

@@ -23,7 +23,7 @@ class EnvProperties {
     }
 }
 
-class AtomListBuilder {
+public class AtomListBuilder {
     var string: String
     var currentCharIndex: Int
     var currentInnerAtom: AtomInner?
@@ -33,7 +33,7 @@ class AtomListBuilder {
         return currentCharIndex < self.string.characters.count
     }
     
-    static let spaceToCommands: [CGFloat: String] = [
+    public static let spaceToCommands: [CGFloat: String] = [
         3 : ",",
         4 : ">",
         5 : ";",
@@ -42,7 +42,7 @@ class AtomListBuilder {
         36 : "qquad",
     ]
     
-    static let styleToCommands: [AtomLineStyle: String] = [
+    public static let styleToCommands: [AtomLineStyle: String] = [
         AtomLineStyle.display: "displaystyle",
         AtomLineStyle.text: "textstyle",
         AtomLineStyle.script: "scriptstyle",
@@ -67,12 +67,12 @@ class AtomListBuilder {
         }
     }
     
-    static func build(fromString string: String) -> AtomList? {
+    public static func build(fromString string: String) -> AtomList? {
         let builder = AtomListBuilder(string: string)
         return builder.build()
     }
     
-    static func convertToString(_ atomList: AtomList) -> String {
+    public static func convertToString(_ atomList: AtomList) -> String {
         var output = ""
         
         for atom in atomList.atoms {
@@ -80,7 +80,7 @@ class AtomListBuilder {
             case .fraction:
                 if let frac = atom as? AtomFraction {
                     if frac.hasRule {
-                        output += "\\\\frac{\(AtomListBuilder.convertToString(frac.numerator!))}{\(AtomListBuilder.convertToString(frac.denominator!))}"
+                        output += "\\frac{\(AtomListBuilder.convertToString(frac.numerator!))}{\(AtomListBuilder.convertToString(frac.denominator!))}"
                     } else {
                         var command: String? = nil
                         
@@ -101,7 +101,7 @@ class AtomListBuilder {
                 }
                 break
             case .radical:
-                output += "\\\\sqrt"
+                output += "\\sqrt"
                 if let rad = atom as? AtomRadical {
                     if rad.degree != nil {
                         output += "[\(convertToString(rad.degree!))]"
@@ -113,17 +113,17 @@ class AtomListBuilder {
                 if let inner = atom as? AtomInner {
                     if inner.leftBoundary != nil || inner.rightBoundary != nil {
                         if inner.leftBoundary != nil {
-                            output += "\\\\left\(delimToString(delim: inner.leftBoundary!))"
+                            output += "\\left\(delimToString(delim: inner.leftBoundary!))"
                         } else {
-                            output += "\\\\left. "
+                            output += "\\left. "
                         }
                         
                         output += convertToString(inner.innerList!)
                         
                         if inner.rightBoundary != nil {
-                            output += "\\\\right\(delimToString(delim: inner.rightBoundary!))"
+                            output += "\\right\(delimToString(delim: inner.rightBoundary!))"
                         } else {
-                            output += "\\\\right. "
+                            output += "\\right. "
                         }
                     } else {
                         output += "{\(convertToString(inner.innerList!))}"
@@ -133,7 +133,7 @@ class AtomListBuilder {
             case .table:
                 if let table = atom as? AtomTable {
                     if table.environment != nil {
-                        output += "\\\\begin{\(table.environment!)}"
+                        output += "\\begin{\(table.environment!)}"
                     }
                     
                     for i in 0..<table.numberOfRows() {
@@ -160,45 +160,45 @@ class AtomListBuilder {
                             }
                         }
                         if i < table.numberOfRows() - 1 {
-                            output += "\\\\\\\\ "
+                            output += "\\\\ "
                         }
                     }
                     
                     if table.environment != nil {
-                        output += "\\\\end{\(table.environment!)}"
+                        output += "\\end{\(table.environment!)}"
                     }
                 }
                 break
             case .overline:
                 if let overline = atom as? AtomOverLine {
-                    output += "\\\\overline"
+                    output += "\\overline"
                     output += "{\(convertToString(overline.innerList!))}"
                 }
                 break
             case .underline:
                 if let underline = atom as? AtomUnderLine {
-                    output += "\\\\underline"
+                    output += "\\underline"
                     output += "{\(convertToString(underline.innerList!))}"
                 }
                 break
             case .accent:
                 if let accent = atom as? AtomAccent {
-                    output += "\\\\\(AtomFactory.getName(of: accent)){\(convertToString(accent.innerList!))}"
+                    output += "\\\(AtomFactory.getName(of: accent)){\(convertToString(accent.innerList!))}"
                 }
                 break
             case .space:
                 if let space = atom as? AtomSpace {
                     if let command = AtomListBuilder.spaceToCommands[space.space] {
-                        output += "\\\\\(command)"
+                        output += "\\\(command)"
                     } else {
-                        output += String.init(format: "\\\\mkern%.1fmu", space.space)
+                        output += String.init(format: "\\mkern%.1fmu", space.space)
                     }
                 }
                 break
             case .style:
                 if let style = atom as? AtomStyle {
                     if let command = AtomListBuilder.styleToCommands[style.style] {
-                        output += "\\\\\(command)"
+                        output += "\\\(command)"
                     }
                 }
                 break
@@ -211,7 +211,7 @@ class AtomListBuilder {
                     output += "-"
                 } else {
                     if let command = AtomFactory.latexSymbolName(for: atom) {
-                        output += "\\\\\(command)"
+                        output += "\\\(command)"
                     } else {
                         output += "\(atom.nucleus)"
                     }
@@ -231,15 +231,15 @@ class AtomListBuilder {
         return output
     }
     
-    static func delimToString(delim: Atom) -> String {
+    public static func delimToString(delim: Atom) -> String {
         if let command = AtomFactory.getDelimiterName(of: delim) {
             let singleChars = [ "(", ")", "[", "]", "<", ">", "|", ".", "/"]
             if singleChars.contains(command) {
                 return command
             } else if command == "||" {
-                return "\\\\|"
+                return "\\|"
             } else {
-                return "\\\\\(command)"
+                return "\\\(command)"
             }
         }
         
@@ -247,6 +247,7 @@ class AtomListBuilder {
     }
     
     func getNextCharacter() -> String? {
+        assert(self.hasCharacters, "Retrieving character at index \(self.currentCharIndex) beyond length \(self.string.characters.count)")
         if self.hasCharacters {
             let currentStringIndex = self.string.index(self.string.startIndex, offsetBy: self.currentCharIndex)
             self.currentCharIndex += 1
@@ -258,6 +259,7 @@ class AtomListBuilder {
     }
     
     func unlookCharacter() {
+        assert(self.currentCharIndex > 0, "Unlooking when at the first character.")
         if self.currentCharIndex > 0 {
             self.currentCharIndex -= 1
         } else {
@@ -271,6 +273,8 @@ class AtomListBuilder {
     
     func buildInternal(oneCharOnly: Bool, stopChar: String?) -> AtomList? {
         let list = AtomList()
+        
+        assert(!(oneCharOnly && (stopChar != nil)), "Cannot set both oneCharOnly and stopChar.")
         
         if oneCharOnly && stopChar != nil {
             print("Cant set both oneCharOnly and stopChar")
@@ -298,24 +302,25 @@ class AtomListBuilder {
             }
             
             if char == "^" {
-                if (prevAtom == nil || prevAtom!.superScript != nil || !prevAtom!.isScriptsAllowed) {
+                assert(!oneCharOnly, "This should have been handled before")
+                if (prevAtom == nil || prevAtom!.superScript != nil || !prevAtom!.isScriptsAllowed()) {
                     // If there is no previous atom, or if it already has a superscript
                     // or if scripts are not allowed for it, then add an empty node.
                     prevAtom = Atom(type: .ordinary, value: "")
                     list.add(prevAtom!)
                 }
                 
-                prevAtom!.superScript = self.buildInternal(oneCharOnly: true)
+                prevAtom!.setSuperScript(self.buildInternal(oneCharOnly: true))
                 continue
             } else if char == "_" {
-                if (prevAtom == nil || prevAtom!.subScript != nil || !prevAtom!.isScriptsAllowed) {
+                assert(!oneCharOnly, "This should have been handled before")
+                if (prevAtom == nil || prevAtom!.subScript != nil || !prevAtom!.isScriptsAllowed()) {
                     // If there is no previous atom, or if it already has a subcript
                     // or if scripts are not allowed for it, then add an empty node.
                     prevAtom = Atom(type: .ordinary, value: "")
                     list.add(prevAtom!)
                 }
-                
-                prevAtom!.subScript = self.buildInternal(oneCharOnly: true)
+                prevAtom!.setSubScript(self.buildInternal(oneCharOnly: true))
                 continue
             } else if char == "{" {
                 // this puts us in a recursive routine, and sets oneCharOnly to false and no stop character
@@ -331,22 +336,28 @@ class AtomListBuilder {
                     return nil
                 }
             } else if char == "}" {
+                assert(!oneCharOnly, "This should have been handled before")
+                assert(stopChar == nil, "This should have been handled before")
                 // We encountered a closing brace when there is no stop set, that means there was no
                 // corresponding opening brace.
                 print("Mismatched braces")
                 return nil
-            } else if char == "\\\\" {
+            } else if char == "\\" {
                 let command = self.readCommand()
                 
                 if let done = self.stop(command: command, list: list, stopChar: stopChar) {
                     return done
-                } else {
-                    if let atom = self.atom(forCommand: command) {
-                        print("wtf atom: \(atom.description)")
+                }
+                else {
+                    atom = self.atom(forCommand: command)
+                    
+                    if atom == nil {
+                        print("Internal error")
+                        return nil
                     }
-                    return nil
                 }
             } else if char == "&" {
+                assert(!oneCharOnly, "This should have been handled before")
                 if self.currentEnv != nil {
                     return list
                 } else {
@@ -357,13 +368,16 @@ class AtomListBuilder {
             } else {
                 atom = AtomFactory.atom(for: char)
                 
-                if atom != nil {
+                if atom == nil {
                     continue
                 }
             }
             
+            assert(atom != nil, "Atom shouldn't be nil")
+            
             if atom == nil {
                 print("wtf atom why nil?")
+                return nil
             }
             
             list.add(atom!)
@@ -430,7 +444,7 @@ class AtomListBuilder {
             self.currentInnerAtom?.innerList = self.buildInternal(oneCharOnly: false)
             
             if self.currentInnerAtom?.rightBoundary == nil {
-                print("Missing \\\\right")
+                print("Missing \\right")
                 return nil
             }
             
@@ -501,7 +515,7 @@ class AtomListBuilder {
             let fracList = AtomList()
             fracList.add(frac)
             return fracList
-        } else if command == "\\\\" ||
+        } else if command == "\\" ||
             command == "cr" {
             if currentEnv != nil {
                 currentEnv!.numOfRows += 1
@@ -515,7 +529,7 @@ class AtomListBuilder {
             }
         } else if command == "end" {
             if self.currentEnv == nil {
-                print("Missing \\\\begin")
+                print("Missing \\begin")
                 return nil
             }
             
@@ -605,7 +619,7 @@ class AtomListBuilder {
         }
         
         if !currentEnv!.ended && currentEnv?.envName == nil {
-            print("Missing \\\\end")
+            print("Missing \\end")
             return nil
         }
         
@@ -637,7 +651,7 @@ class AtomListBuilder {
         while self.hasCharacters {
             let char = self.getNextCharacter()!
             
-            if char == "\\\\" {
+            if char == "\\" {
                 let command = self.readCommand()
                 if command == "|" {
                     return "||"
@@ -680,7 +694,7 @@ class AtomListBuilder {
             ">",
             ";",
             "!",
-            "\\\\"
+            "\\"
         ]
         
         if self.hasCharacters {
