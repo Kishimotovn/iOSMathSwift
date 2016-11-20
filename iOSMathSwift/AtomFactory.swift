@@ -213,9 +213,9 @@ class AtomFactory {
 
 
         // Relations
-        "leq" : Atom(type: .relation, value: unicodeSymbolLessEqual),
-        "geq" : Atom(type: .relation, value: unicodeSymbolGreaterEqual),
-        "neq" : Atom(type: .relation, value: unicodeSymbolNotEqual),
+        "leq" : Atom(type: .relation, value: UnicodeSymbol.lessEqual),
+        "geq" : Atom(type: .relation, value: UnicodeSymbol.greaterEqual),
+        "neq" : Atom(type: .relation, value: UnicodeSymbol.notEqual),
         "in" : Atom(type: .relation, value: "\u{2208}"),
         "notin" : Atom(type: .relation, value: "\u{2209}"),
         "ni" : Atom(type: .relation, value: "\u{220B}"),
@@ -431,17 +431,17 @@ class AtomFactory {
     
     // Return an atom for times sign \times or *
     static func times() -> Atom {
-        return Atom(type: .binaryOperator, value: unicodeSymbolMultiplication)
+        return Atom(type: .binaryOperator, value: UnicodeSymbol.multiplication)
     }
     
     // Return an atom for division sign \div or /
     static func divide() -> Atom {
-        return Atom(type: .binaryOperator, value: unicodeSymbolDivision)
+        return Atom(type: .binaryOperator, value: UnicodeSymbol.division)
     }
     
     // Return an atom aka placeholder square
     static func placeholder() -> Atom {
-        return Atom(type: .placeholder, value: unicodeSymbolWhiteSquare)
+        return Atom(type: .placeholder, value: UnicodeSymbol.whiteSquare)
     }
     
     static func placeholderFraction() -> AtomFraction {
