@@ -7,13 +7,77 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB28B2111DE0D408001D6CA6 /* AtomListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28B2101DE0D408001D6CA6 /* AtomListBuilder.swift */; };
 		DB751ED61DDF4F14004C549C /* iOSMathSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751ED41DDF4F14004C549C /* iOSMathSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB751EF91DDF4F37004C549C /* IosMath.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EDD1DDF4F37004C549C /* IosMath.h */; };
+		DB751EFA1DDF4F37004C549C /* MTMathAtomFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EDF1DDF4F37004C549C /* MTMathAtomFactory.h */; };
+		DB751EFB1DDF4F37004C549C /* MTMathAtomFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EE01DDF4F37004C549C /* MTMathAtomFactory.m */; };
+		DB751EFC1DDF4F37004C549C /* MTMathList.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EE11DDF4F37004C549C /* MTMathList.h */; };
+		DB751EFD1DDF4F37004C549C /* MTMathList.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EE21DDF4F37004C549C /* MTMathList.m */; };
+		DB751EFE1DDF4F37004C549C /* MTMathListBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EE31DDF4F37004C549C /* MTMathListBuilder.h */; };
+		DB751EFF1DDF4F37004C549C /* MTMathListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EE41DDF4F37004C549C /* MTMathListBuilder.m */; };
+		DB751F001DDF4F37004C549C /* MTMathListIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EE51DDF4F37004C549C /* MTMathListIndex.h */; };
+		DB751F011DDF4F37004C549C /* MTMathListIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EE61DDF4F37004C549C /* MTMathListIndex.m */; };
+		DB751F021DDF4F37004C549C /* MTUnicode.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EE71DDF4F37004C549C /* MTUnicode.h */; };
+		DB751F031DDF4F37004C549C /* MTUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EE81DDF4F37004C549C /* MTUnicode.m */; };
+		DB751F041DDF4F37004C549C /* MTFont+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EEB1DDF4F37004C549C /* MTFont+Internal.h */; };
+		DB751F051DDF4F37004C549C /* MTFontMathTable.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EEC1DDF4F37004C549C /* MTFontMathTable.h */; };
+		DB751F061DDF4F37004C549C /* MTFontMathTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EED1DDF4F37004C549C /* MTFontMathTable.m */; };
+		DB751F071DDF4F37004C549C /* MTMathListDisplayInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EEE1DDF4F37004C549C /* MTMathListDisplayInternal.h */; };
+		DB751F081DDF4F37004C549C /* MTTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EEF1DDF4F37004C549C /* MTTypesetter.h */; };
+		DB751F091DDF4F37004C549C /* MTTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EF01DDF4F37004C549C /* MTTypesetter.m */; };
+		DB751F0A1DDF4F37004C549C /* MTFont.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EF11DDF4F37004C549C /* MTFont.h */; };
+		DB751F0B1DDF4F37004C549C /* MTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EF21DDF4F37004C549C /* MTFont.m */; };
+		DB751F0C1DDF4F37004C549C /* MTFontManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EF31DDF4F37004C549C /* MTFontManager.h */; };
+		DB751F0D1DDF4F37004C549C /* MTFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EF41DDF4F37004C549C /* MTFontManager.m */; };
+		DB751F0E1DDF4F37004C549C /* MTMathListDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EF51DDF4F37004C549C /* MTMathListDisplay.h */; };
+		DB751F0F1DDF4F37004C549C /* MTMathListDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EF61DDF4F37004C549C /* MTMathListDisplay.m */; };
+		DB751F101DDF4F37004C549C /* MTMathUILabel.h in Headers */ = {isa = PBXBuildFile; fileRef = DB751EF71DDF4F37004C549C /* MTMathUILabel.h */; };
+		DB751F111DDF4F37004C549C /* MTMathUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB751EF81DDF4F37004C549C /* MTMathUILabel.m */; };
+		DB751F131DDF4F64004C549C /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB751F121DDF4F64004C549C /* Atom.swift */; };
+		DB751F151DDF53BA004C549C /* AtomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB751F141DDF53BA004C549C /* AtomList.swift */; };
+		DB79F7E21DDF87BB005F4B80 /* AtomFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB79F7E11DDF87BB005F4B80 /* AtomFactory.swift */; };
+		DBC490871DE1455600D6DD3C /* AtomListIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC490861DE1455600D6DD3C /* AtomListIndex.swift */; };
+		DBC490891DE1ED3800D6DD3C /* AtomListRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC490881DE1ED3800D6DD3C /* AtomListRange.swift */; };
+		DBC4908B1DE1F2B800D6DD3C /* UnicodeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC4908A1DE1F2B800D6DD3C /* UnicodeSymbol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB28B2101DE0D408001D6CA6 /* AtomListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListBuilder.swift; sourceTree = "<group>"; };
 		DB751ED11DDF4F14004C549C /* iOSMathSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSMathSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB751ED41DDF4F14004C549C /* iOSMathSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSMathSwift.h; sourceTree = "<group>"; };
 		DB751ED51DDF4F14004C549C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB751EDD1DDF4F37004C549C /* IosMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosMath.h; sourceTree = "<group>"; };
+		DB751EDF1DDF4F37004C549C /* MTMathAtomFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathAtomFactory.h; sourceTree = "<group>"; };
+		DB751EE01DDF4F37004C549C /* MTMathAtomFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathAtomFactory.m; sourceTree = "<group>"; };
+		DB751EE11DDF4F37004C549C /* MTMathList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathList.h; sourceTree = "<group>"; };
+		DB751EE21DDF4F37004C549C /* MTMathList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathList.m; sourceTree = "<group>"; };
+		DB751EE31DDF4F37004C549C /* MTMathListBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathListBuilder.h; sourceTree = "<group>"; };
+		DB751EE41DDF4F37004C549C /* MTMathListBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathListBuilder.m; sourceTree = "<group>"; };
+		DB751EE51DDF4F37004C549C /* MTMathListIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathListIndex.h; sourceTree = "<group>"; };
+		DB751EE61DDF4F37004C549C /* MTMathListIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathListIndex.m; sourceTree = "<group>"; };
+		DB751EE71DDF4F37004C549C /* MTUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUnicode.h; sourceTree = "<group>"; };
+		DB751EE81DDF4F37004C549C /* MTUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTUnicode.m; sourceTree = "<group>"; };
+		DB751EEB1DDF4F37004C549C /* MTFont+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTFont+Internal.h"; sourceTree = "<group>"; };
+		DB751EEC1DDF4F37004C549C /* MTFontMathTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFontMathTable.h; sourceTree = "<group>"; };
+		DB751EED1DDF4F37004C549C /* MTFontMathTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFontMathTable.m; sourceTree = "<group>"; };
+		DB751EEE1DDF4F37004C549C /* MTMathListDisplayInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathListDisplayInternal.h; sourceTree = "<group>"; };
+		DB751EEF1DDF4F37004C549C /* MTTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTypesetter.h; sourceTree = "<group>"; };
+		DB751EF01DDF4F37004C549C /* MTTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTypesetter.m; sourceTree = "<group>"; };
+		DB751EF11DDF4F37004C549C /* MTFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFont.h; sourceTree = "<group>"; };
+		DB751EF21DDF4F37004C549C /* MTFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFont.m; sourceTree = "<group>"; };
+		DB751EF31DDF4F37004C549C /* MTFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFontManager.h; sourceTree = "<group>"; };
+		DB751EF41DDF4F37004C549C /* MTFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFontManager.m; sourceTree = "<group>"; };
+		DB751EF51DDF4F37004C549C /* MTMathListDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathListDisplay.h; sourceTree = "<group>"; };
+		DB751EF61DDF4F37004C549C /* MTMathListDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathListDisplay.m; sourceTree = "<group>"; };
+		DB751EF71DDF4F37004C549C /* MTMathUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMathUILabel.h; sourceTree = "<group>"; };
+		DB751EF81DDF4F37004C549C /* MTMathUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMathUILabel.m; sourceTree = "<group>"; };
+		DB751F121DDF4F64004C549C /* Atom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
+		DB751F141DDF53BA004C549C /* AtomList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomList.swift; sourceTree = "<group>"; };
+		DB79F7E11DDF87BB005F4B80 /* AtomFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomFactory.swift; sourceTree = "<group>"; };
+		DBC490861DE1455600D6DD3C /* AtomListIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListIndex.swift; sourceTree = "<group>"; };
+		DBC490881DE1ED3800D6DD3C /* AtomListRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomListRange.swift; sourceTree = "<group>"; };
+		DBC4908A1DE1F2B800D6DD3C /* UnicodeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnicodeSymbol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +94,7 @@
 		DB751EC71DDF4F14004C549C = {
 			isa = PBXGroup;
 			children = (
+				DB751EDC1DDF4F37004C549C /* iosMath */,
 				DB751ED31DDF4F14004C549C /* iOSMathSwift */,
 				DB751ED21DDF4F14004C549C /* Products */,
 			);
@@ -48,8 +113,71 @@
 			children = (
 				DB751ED41DDF4F14004C549C /* iOSMathSwift.h */,
 				DB751ED51DDF4F14004C549C /* Info.plist */,
+				DB751F121DDF4F64004C549C /* Atom.swift */,
+				DB751F141DDF53BA004C549C /* AtomList.swift */,
+				DB79F7E11DDF87BB005F4B80 /* AtomFactory.swift */,
+				DB28B2101DE0D408001D6CA6 /* AtomListBuilder.swift */,
+				DBC490861DE1455600D6DD3C /* AtomListIndex.swift */,
+				DBC490881DE1ED3800D6DD3C /* AtomListRange.swift */,
+				DBC4908A1DE1F2B800D6DD3C /* UnicodeSymbol.swift */,
 			);
 			path = iOSMathSwift;
+			sourceTree = "<group>";
+		};
+		DB751EDC1DDF4F37004C549C /* iosMath */ = {
+			isa = PBXGroup;
+			children = (
+				DB751EDD1DDF4F37004C549C /* IosMath.h */,
+				DB751EDE1DDF4F37004C549C /* lib */,
+				DB751EE91DDF4F37004C549C /* render */,
+			);
+			path = iosMath;
+			sourceTree = "<group>";
+		};
+		DB751EDE1DDF4F37004C549C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				DB751EDF1DDF4F37004C549C /* MTMathAtomFactory.h */,
+				DB751EE01DDF4F37004C549C /* MTMathAtomFactory.m */,
+				DB751EE11DDF4F37004C549C /* MTMathList.h */,
+				DB751EE21DDF4F37004C549C /* MTMathList.m */,
+				DB751EE31DDF4F37004C549C /* MTMathListBuilder.h */,
+				DB751EE41DDF4F37004C549C /* MTMathListBuilder.m */,
+				DB751EE51DDF4F37004C549C /* MTMathListIndex.h */,
+				DB751EE61DDF4F37004C549C /* MTMathListIndex.m */,
+				DB751EE71DDF4F37004C549C /* MTUnicode.h */,
+				DB751EE81DDF4F37004C549C /* MTUnicode.m */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		DB751EE91DDF4F37004C549C /* render */ = {
+			isa = PBXGroup;
+			children = (
+				DB751EEA1DDF4F37004C549C /* internal */,
+				DB751EF11DDF4F37004C549C /* MTFont.h */,
+				DB751EF21DDF4F37004C549C /* MTFont.m */,
+				DB751EF31DDF4F37004C549C /* MTFontManager.h */,
+				DB751EF41DDF4F37004C549C /* MTFontManager.m */,
+				DB751EF51DDF4F37004C549C /* MTMathListDisplay.h */,
+				DB751EF61DDF4F37004C549C /* MTMathListDisplay.m */,
+				DB751EF71DDF4F37004C549C /* MTMathUILabel.h */,
+				DB751EF81DDF4F37004C549C /* MTMathUILabel.m */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		DB751EEA1DDF4F37004C549C /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				DB751EEB1DDF4F37004C549C /* MTFont+Internal.h */,
+				DB751EEC1DDF4F37004C549C /* MTFontMathTable.h */,
+				DB751EED1DDF4F37004C549C /* MTFontMathTable.m */,
+				DB751EEE1DDF4F37004C549C /* MTMathListDisplayInternal.h */,
+				DB751EEF1DDF4F37004C549C /* MTTypesetter.h */,
+				DB751EF01DDF4F37004C549C /* MTTypesetter.m */,
+			);
+			path = internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,7 +187,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB751EFA1DDF4F37004C549C /* MTMathAtomFactory.h in Headers */,
+				DB751F071DDF4F37004C549C /* MTMathListDisplayInternal.h in Headers */,
+				DB751F0E1DDF4F37004C549C /* MTMathListDisplay.h in Headers */,
+				DB751EFC1DDF4F37004C549C /* MTMathList.h in Headers */,
+				DB751F001DDF4F37004C549C /* MTMathListIndex.h in Headers */,
+				DB751F021DDF4F37004C549C /* MTUnicode.h in Headers */,
+				DB751EFE1DDF4F37004C549C /* MTMathListBuilder.h in Headers */,
+				DB751F081DDF4F37004C549C /* MTTypesetter.h in Headers */,
+				DB751F051DDF4F37004C549C /* MTFontMathTable.h in Headers */,
+				DB751EF91DDF4F37004C549C /* IosMath.h in Headers */,
 				DB751ED61DDF4F14004C549C /* iOSMathSwift.h in Headers */,
+				DB751F0C1DDF4F37004C549C /* MTFontManager.h in Headers */,
+				DB751F101DDF4F37004C549C /* MTMathUILabel.h in Headers */,
+				DB751F0A1DDF4F37004C549C /* MTFont.h in Headers */,
+				DB751F041DDF4F37004C549C /* MTFont+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +238,7 @@
 					DB751ED01DDF4F14004C549C = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 4SCM77QT7P;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +275,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB751EFD1DDF4F37004C549C /* MTMathList.m in Sources */,
+				DBC490891DE1ED3800D6DD3C /* AtomListRange.swift in Sources */,
+				DB28B2111DE0D408001D6CA6 /* AtomListBuilder.swift in Sources */,
+				DB751F151DDF53BA004C549C /* AtomList.swift in Sources */,
+				DBC490871DE1455600D6DD3C /* AtomListIndex.swift in Sources */,
+				DB751F031DDF4F37004C549C /* MTUnicode.m in Sources */,
+				DB751F061DDF4F37004C549C /* MTFontMathTable.m in Sources */,
+				DB751F0B1DDF4F37004C549C /* MTFont.m in Sources */,
+				DB79F7E21DDF87BB005F4B80 /* AtomFactory.swift in Sources */,
+				DBC4908B1DE1F2B800D6DD3C /* UnicodeSymbol.swift in Sources */,
+				DB751EFB1DDF4F37004C549C /* MTMathAtomFactory.m in Sources */,
+				DB751F0F1DDF4F37004C549C /* MTMathListDisplay.m in Sources */,
+				DB751F091DDF4F37004C549C /* MTTypesetter.m in Sources */,
+				DB751F111DDF4F37004C549C /* MTMathUILabel.m in Sources */,
+				DB751EFF1DDF4F37004C549C /* MTMathListBuilder.m in Sources */,
+				DB751F131DDF4F64004C549C /* Atom.swift in Sources */,
+				DB751F011DDF4F37004C549C /* MTMathListIndex.m in Sources */,
+				DB751F0D1DDF4F37004C549C /* MTFontManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +401,7 @@
 		DB751EDA1DDF4F14004C549C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4SCM77QT7P;
@@ -252,6 +414,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tpa.usth.iOSMathSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -259,6 +422,7 @@
 		DB751EDB1DDF4F14004C549C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4SCM77QT7P;
@@ -294,6 +458,7 @@
 				DB751EDB1DDF4F14004C549C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
